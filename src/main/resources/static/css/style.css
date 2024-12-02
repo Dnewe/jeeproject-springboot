@@ -1,0 +1,220 @@
+/* Style global */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Containers globaux */
+.container {
+    max-width: 800px;
+    margin: auto;
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Header toujours en haut (sauf loginPage.jsp) */
+header {
+    background-color: #87CEEB;
+    border-bottom: 2px solid #0056b3;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 10px 20px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+header .navbar-brand {
+    display: flex;
+    align-items: center;
+}
+
+header .navbar-brand .logo {
+    margin-right: 10px;
+    border-radius: 50%;
+    border: 2px solid #0056b3;
+}
+
+header .brand-text {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #0056b3;
+}
+
+/* Bouton de d�connexion */
+.logout-btn {
+    background-color: #0056b3;
+    color: #fff;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.logout-btn:hover {
+    background-color: #003d7a;
+    color: #fff;
+}
+
+/* Titres */
+h1, h2, h3 {
+    color: #333;
+}
+
+/* Boutons */
+/*
+.btn {
+    font-size: inherit;
+    padding: inherit;
+}*/
+/*button, .btn {
+    display: inline-block;
+    padding: 10px 15px;
+    margin: 10px 5px;
+    font-size: 1rem;
+    text-align: center;
+    text-decoration: none;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}*/
+
+button:hover, .btn:hover {
+    background-color: #0056b3;
+    text-decoration: none;
+    filter: brightness(0.9);
+}
+
+/* Couleurs des boutons */
+/*
+.btn-primary {
+    font-size: inherit;
+    padding: inherit;
+    background-color: #007bff;
+    color: white;
+}
+
+.btn-secondary {
+    font-size: inherit;
+    padding: inherit;
+    background-color: #6c757d;
+    color: white;
+}
+
+.btn-info {
+    font-size: inherit;
+    padding: inherit;
+    background-color: #17a2b8;
+    color: white;
+}
+
+.btn-success {
+    font-size: inherit;
+    padding: inherit;
+    background-color: #28a745;
+    color: white;
+}
+.btn-warning {
+    font-size: inherit;
+    padding: inherit;
+    background-color: #ffc107;
+    color: white;
+}
+
+.btn-dark {
+    font-size: inherit;
+    padding: inherit;
+    background-color: #343a40;
+    color: white;
+}*/
+
+/* Tables */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+table th, table td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+/* Messages d'erreur */
+.error-message {
+    color: red;
+    font-size: 0.9em;
+    margin-top: 10px;
+}
+
+/* Footer toujours en bas */
+footer {
+    background-color: #f1f1f1;
+    text-align: center;
+    padding: 10px 0;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    margin-top: auto;
+    border-top: 1px solid #ddd;
+}
+
+/* Adaptations sp�cifiques au tableau de bord admin */
+.admin-dashboard {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+}
+
+.admin-dashboard h2 {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+.admin-dashboard .mt-3 {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.admin-dashboard .btn {
+    font-size: 1.1rem;
+    padding: 12px 20px;
+}
+
+/* Suppression des styles header/footer pour loginPage.jsp */
+body.login-page header, body.login-page footer {
+    display: none;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    body {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .container {
+        width: 95%;
+        padding: 15px;
+    }
+
+    /*.btn, button {
+        display: block;
+        width: 100%;
+        margin: 10px 0;
+        text-align: center;
+    }*/
+}

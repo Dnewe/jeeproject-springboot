@@ -43,9 +43,9 @@
                         <td>
                             <form action="${pageContext.request.contextPath}/course" method="post" style="display: inline-block;">
                                 <input type="hidden" name="action" value="removeProfessor">
-                                <input type="hidden" name="result-page" value="professor?action=details&professor-id=${professor.id}">
-                                <input type="hidden" name="professor-id" value="${professor.id}">
-                                <input type="hidden" name="course-id" value="${course.id}">
+                                <input type="hidden" name="result-page" value="professor?action=details&professorId=${professor.id}">
+                                <input type="hidden" name="professorId" value="${professor.id}">
+                                <input type="hidden" name="courseId" value="${course.id}">
                                 <button type="submit" class="btn btn-danger btn-sm">Retirer</button>
                             </form>
                         </td>
@@ -58,12 +58,12 @@
         <h4>Assigner un Nouveau Cours</h4>
         <form action="${pageContext.request.contextPath}/course" method="post">
             <input type="hidden" name="action" value="assignProfessor">
-            <input type="hidden" name="result-page" value="professor?action=details&professor-id=${professor.id}">
-            <input type="hidden" name="professor-id" value="${professor.id}">
+            <input type="hidden" name="result-page" value="professor?action=details&professorId=${professor.id}">
+            <input type="hidden" name="professorId" value="${professor.id}">
 
             <div class="form-group">
                 <label for="course">Choisir un Cours</label>
-                <select name="course-id" id="course" class="form-control">
+                <select name="courseId" id="course" class="form-control">
                     <option value="">Sélectionner un cours</option>
                     <c:forEach var="course" items="${availableCourses}">
                         <option value="${course.id}">${course.name}</option>
@@ -73,11 +73,11 @@
             <button type="submit" class="btn btn-primary">Assigner</button>
         </form>
         <br>
-        <a href="${pageContext.request.contextPath}/professor?action=updateForm&professor-id=${professor.id}" class="btn btn-warning">Modifier</a>
+        <a href="${pageContext.request.contextPath}/professor?action=updateForm&professorId=${professor.id}" class="btn btn-warning">Modifier</a>
         <!-- Formulaire pour la suppression en POST -->
         <form action="${pageContext.request.contextPath}/professor" method="post" style="display: inline;">
             <input type="hidden" name="action" value="delete">
-            <input type="hidden" name="professor-id" value="${professor.id}">
+            <input type="hidden" name="professorId" value="${professor.id}">
             <button type="submit" class="btn btn-danger" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce professeur ?');">Supprimer</button>
         </form>
         <a href="${pageContext.request.contextPath}/professor?action=list" class="btn btn-secondary">Retour à la liste des professeurs</a>

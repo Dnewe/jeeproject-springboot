@@ -19,7 +19,7 @@
     <form class="d-flex" action="${pageContext.request.contextPath}/student" method="get">
         <input type="hidden" name="action" value="list">
         <input class="form-control form-control-sm mr-sm-2" type="search" name="search" placeholder="Search" aria-label="Search"></input>
-        <select class="form-select form-select-sm me-1" name="course-id">
+        <select class="form-select form-select-sm me-1" name="courseId">
             <option value="" ${empty filteredCourse ? 'selected' : ''}>Aucun filtre de cours</option>
             <c:forEach var="course" items="${courses}">
                 <option value="${course.id}" ${filteredCourse != null && filteredCourse.id == course.id ? 'selected' : ''}>
@@ -64,11 +64,11 @@
                 <td><fmt:formatDate value="${student.dateOfBirth}" pattern="dd/MM/yyyy"/></td>
                 <td>
                     <!-- Boutons actions -->
-                    <a href="${pageContext.request.contextPath}/student?action=details&student-id=${student.id}" class="btn btn-info btn-sm">Détails</a>
-                    <a href="${pageContext.request.contextPath}/student?action=updateForm&student-id=${student.id}" class="btn btn-warning btn-sm">Modifier</a>
+                    <a href="${pageContext.request.contextPath}/student?action=details&studentId=${student.id}" class="btn btn-info btn-sm">Détails</a>
+                    <a href="${pageContext.request.contextPath}/student?action=updateForm&studentId=${student.id}" class="btn btn-warning btn-sm">Modifier</a>
                     <form action="${pageContext.request.contextPath}/student" method="post" style="display: inline;">
                         <input type="hidden" name="action" value="delete">
-                        <input type="hidden" name="student-id" value="${student.id}">
+                        <input type="hidden" name="studentId" value="${student.id}">
                         <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet étudiant ?');">Supprimer</button>
                     </form>
                 </td>

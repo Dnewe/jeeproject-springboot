@@ -36,6 +36,7 @@ public class RegisterController {
 
     @PostMapping
     public String register(@Valid @ModelAttribute User user,
+                           @SessionAttribute("loggedUser") User loggedUser,
                            @RequestParam String role,
                            @RequestParam(required = false) String professorLastName,
                            @RequestParam(required = false) String professorFirstName,

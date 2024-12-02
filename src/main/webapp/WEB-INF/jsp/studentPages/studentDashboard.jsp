@@ -9,8 +9,8 @@
     <h4>Que voulez-vous faire ?</h4>
 
     <div class="mt-3">
-        <a href="course?action=studentList&student-id=${sessionScope.loggedStudent.id}" class="btn btn-primary">Voir les cours</a>
-        <a href="result?action=studentList&student-id=${sessionScope.loggedStudent.id}" class="btn btn-primary">Voir les notes</a>
+        <a href="course?action=studentList&studentId=${sessionScope.loggedStudent.id}" class="btn btn-primary">Voir les cours</a>
+        <a href="result?action=studentList&studentId=${sessionScope.loggedStudent.id}" class="btn btn-primary">Voir les notes</a>
     </div>
 </div>
 

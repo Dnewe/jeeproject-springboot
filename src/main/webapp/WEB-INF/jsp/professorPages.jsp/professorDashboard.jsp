@@ -1,5 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<jsp:include page="WEB-INF/util/header.jsp">
+<jsp:include page="../layout/header.jsp">
     <jsp:param name="pageTitle" value="Tableau de Bord Etudiant" />
 </jsp:include>
 
@@ -9,7 +9,7 @@
     <h4>Que voulez-vous faire ?</h4>
 
     <div class="mt-3">
-        <a href="course?action=professorList&professor-id=${sessionScope.loggedProfessor.id}" class="btn btn-primary">Voir les cours</a>
+        <a href="course?action=professorList&professorId=${sessionScope.loggedProfessor.id}" class="btn btn-primary">Voir les cours</a>
     </div>
 </div>
 

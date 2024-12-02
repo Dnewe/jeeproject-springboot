@@ -15,8 +15,8 @@
 
     <form action="${pageContext.request.contextPath}/student?action=update" method="post">
         <!-- ID étudiant caché -->
-        <input type="hidden" name="student-id" value="${student.id}">
-        <input type="hidden" name="result-page" value="student?action=details&student-id=${student.id}">
+        <input type="hidden" name="studentId" value="${student.id}">
+        <input type="hidden" name="resultPage" value="student?action=details&studentId=${student.id}">
 
         <!-- Nom -->
         <div class="mb-3">
@@ -37,7 +37,7 @@
         </div>
 
         <!-- Boutons -->
-        <a href="${pageContext.request.contextPath}/student?action=details&student-id=${student.id}" class="btn btn-danger">Annuler</a>
+        <a href="${pageContext.request.contextPath}/student?action=details&studentId=${student.id}" class="btn btn-danger">Annuler</a>
         <button type="submit" class="btn btn-primary">Sauvegarder</button>
     </form>
 </div>

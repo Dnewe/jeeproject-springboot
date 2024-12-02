@@ -45,9 +45,9 @@
                         <td>${course.professor.lastName} ${course.professor.firstName}</td>
                         <td><form action="${pageContext.request.contextPath}/enrollment" method="post" style="display: inline-block;">
                             <input type="hidden" name="action" value="delete">
-                            <input type="hidden" name="result-page" value="student?action=details&student-id=${student.id}">
-                            <input type="hidden" name="student-id" value="${student.id}">
-                            <input type="hidden" name="course-id" value="${course.id}">
+                            <input type="hidden" name="resultPage" value="student?action=details&studentId=${student.id}">
+                            <input type="hidden" name="studentId" value="${student.id}">
+                            <input type="hidden" name="courseId" value="${course.id}">
                             <button type="submit" class="btn btn-danger btn-sm">Retirer</button>
                         </form></td>
                     </tr>
@@ -59,10 +59,10 @@
         <h4>Inscrire à un Cours</h4>
         <form class="d-flex" action="${pageContext.request.contextPath}/enrollment" method="post">
             <input type="hidden" name="action" value="create">
-            <input type="hidden" name="result-page" value="student?action=details&student-id=${student.id}">
-            <input type="hidden" name="student-id" value="${student.id}">
+            <input type="hidden" name="resultPage" value="student?action=details&studentId=${student.id}">
+            <input type="hidden" name="studentId" value="${student.id}">
 
-            <select class="form-select form-select-sm mr-sm-2" name="course-id" id="course" class="form-control">
+            <select class="form-select form-select-sm mr-sm-2" name="courseId" id="course" class="form-control">
                 <option value="">Sélectionner un cours</option>
                 <c:forEach var="course" items="${availableCourses}">
                     <option value="${course.id}">${course.name}</option>
@@ -73,20 +73,20 @@
 
         <div class="mt-4">
             <h4>Administratif</h4>
-            <a href="${pageContext.request.contextPath}/transcript?student-id=${student.id}" class="btn btn-primary">Télécharger Relevé de notes</a>
+            <a href="${pageContext.request.contextPath}/transcript?studentId=${student.id}" class="btn btn-primary">Télécharger Relevé de notes</a>
             <form action="${pageContext.request.contextPath}/performanceReport" method="post" style="display: inline;">
-                <input type="hidden" name="student-id" value="${student.id}">
+                <input type="hidden" name="studentId" value="${student.id}">
                 <button type="submit" class="btn btn-primary">Télécharger Rapport de Performance</button>
             </form>
         </div>
 
         <br>
         <div class="mt-4">
-            <a href="${pageContext.request.contextPath}/student?action=updateForm&student-id=${student.id}" class="btn btn-warning">Modifier</a>
+            <a href="${pageContext.request.contextPath}/student?action=updateForm&studentId=${student.id}" class="btn btn-warning">Modifier</a>
             <!-- Formulaire pour la suppression en POST -->
             <form action="${pageContext.request.contextPath}/student" method="post" style="display: inline;">
                 <input type="hidden" name="action" value="delete">
-                <input type="hidden" name="student-id" value="${student.id}">
+                <input type="hidden" name="studentId" value="${student.id}">
                 <button type="submit" class="btn btn-danger" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet étudiant ?');">Supprimer</button>
             </form>
             <a href="${pageContext.request.contextPath}/student?action=list" class="btn btn-secondary">Retour à la liste</a>

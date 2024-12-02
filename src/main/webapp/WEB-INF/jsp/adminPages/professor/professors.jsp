@@ -30,12 +30,12 @@
                 <td>${professor.firstName}</td>
                 <td>${professor.user.email}</td>
                 <td>
-                    <a href="${pageContext.request.contextPath}/professor?action=details&professor-id=${professor.id}" class="btn btn-info btn-sm">Détails</a>
-                    <a href="${pageContext.request.contextPath}/professor?action=updateForm&professor-id=${professor.id}" class="btn btn-warning btn-sm">Modifier</a>
+                    <a href="${pageContext.request.contextPath}/professor?action=details&professorId=${professor.id}" class="btn btn-info btn-sm">Détails</a>
+                    <a href="${pageContext.request.contextPath}/professor?action=updateForm&professorId=${professor.id}" class="btn btn-warning btn-sm">Modifier</a>
                     <!-- Formulaire pour la suppression en POST -->
                     <form action="${pageContext.request.contextPath}/professor" method="post" style="display: inline;">
                         <input type="hidden" name="action" value="delete">
-                        <input type="hidden" name="professor-id" value="${professor.id}">
+                        <input type="hidden" name="professorId" value="${professor.id}">
                         <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce professeur ?');">Supprimer</button>
                     </form>
 

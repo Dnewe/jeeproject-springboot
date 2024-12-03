@@ -7,13 +7,13 @@ import com.project.jeeproject_springboot.service.ProfessorService;
 import com.project.jeeproject_springboot.service.StudentService;
 import com.project.jeeproject_springboot.service.UserService;
 import com.project.jeeproject_springboot.util.EmailUtil;
-import com.project.jeeproject_springboot.util.TypeUtil;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -32,69 +32,98 @@ public class UserController {
     @GetMapping
     public String handleAction(@RequestParam(required = false) String action,
                                @RequestParam(required = false) Integer userId,
-                               @RequestParam(required = false) String role,
-                               Model model) {
+                               @RequestParam(required = false) Optional<String> role,
+                               @SessionAttribute("loggedUser") Optional<User> loggedUser,
+                               Model model,
+                               RedirectAttributes redirectAttributes) {
         if (action == null) {
             return "/commonPages/error"; // Action invalid
         }
 
         switch (action) {
             case "list":
-                if (!isAdmin()) return "unauthorized"; // Si l'utilisateur n'est pas admin
+                if (notAdmin(loggedUser)) return "/commonPages/unauthorized"; // Si l'utilisateur n'est pas admin
                 Iterable<User> users = userService.getAllUsers();
                 model.addAttribute("users", users);
-                return "user/list"; // page qui liste les utilisateurs
+                return "adminPages/user/users"; // page qui liste les utilisateurs
             case "details":
-                if (!isAdmin()) return "unauthorized";
+                if (notAdmin(loggedUser)) return "commonPages/unauthorized";
                 if (userId == null || userService.getUserById(userId).isEmpty()) {
-                    model.addAttribute("errorMessage", "Utilisateur introuvable.");
-                    return "user/list";
+                    redirectAttributes.addFlashAttribute("errorMessage", "Utilisateur introuvable.");
+                    return "redirect:/user?action=list";
                 }
                 User user = userService.getUserById(userId).get();
-                model.addAttribute("user", user);
-                return "user/details"; // page des détails utilisateur
-            case "createForm":
-                if (!isAdmin()) return "unauthorized";
-                model.addAttribute("selectedRole", role);
-                return "user/register"; // Formulaire de création
-            case "updateForm":
-                if (!isAdmin()) return "unauthorized";
-                if (userId == null || userService.getUserById(userId) == null) {
-                    model.addAttribute("errorMessage", "Utilisateur introuvable.");
-                    return "error";
+                switch (user.getRole()) {
+                    case "professor":
+                        Optional<Professor> professor = professorService.getProfessorByUserId(userId);
+                        if (professor.isPresent()) {
+                            model.addAttribute("firstName", professor.get().getFirstName());
+                            model.addAttribute("lastName", professor.get().getLastName());
+                        }
+                        break;
+                    case "student":
+                        Optional<Student> student = studentService.findStudentByUserId(userId);
+                        if (student.isPresent()) {
+                            model.addAttribute("firstName", student.get().getFirstName());
+                            model.addAttribute("lastName", student.get().getLastName());
+                        }
+                        break;
+                    default:
+                        model.addAttribute("firstName", "N/A");
+                        model.addAttribute("lastName", "N/A");
                 }
-                model.addAttribute("user", userService.getUserById(userId));
-                return "user/update"; // Formulaire de mise à jour
+                model.addAttribute("user", user);
+                return "adminPages/user/userDetails"; // page des détails utilisateur
+            case "createForm":
+                if (notAdmin(loggedUser)) return "/commonPages/unauthorized";
+                model.addAttribute("selectedRole", role.isPresent()? role.get() : "admin");
+                return "adminPages/user/register"; // Formulaire de création
+            case "updateForm":
+                if (notAdmin(loggedUser)) return "/commonPages/unauthorized";
+                if (userId == null || userService.getUserById(userId).isEmpty()) {
+                    redirectAttributes.addFlashAttribute("errorMessage", "Utilisateur introuvable.");
+                    return "redirect:/user?action=list";
+                }
+                model.addAttribute("user", userService.getUserById(userId).get());
+                return "adminPages/user/updateUser"; // Formulaire de mise à jour
             default:
-                return "error"; // Action inconnue
+                return "commonPages/error"; // Action inconnue
         }
     }
 
     @PostMapping
     public String handlePostAction(@RequestParam String action,
-                                   @RequestParam String email,
-                                   @RequestParam String password,
-                                   @RequestParam String role,
+                                   @RequestParam Optional<String> email,
+                                   @RequestParam Optional<String> password,
                                    @RequestParam(required = false) Integer userId,
-                                   Model model) {
+                                   @SessionAttribute("loggedUser") Optional<User> loggedUser,
+                                   RedirectAttributes redirectAttributes) {
 
         switch (action) {
             case "update":
-                if (!isAdmin()) return "unauthorized";
-                updateUser(userId, email, password, model);
+                if (notAdmin(loggedUser)) return "/commonPages/unauthorized";
+                if (email.isEmpty() || password.isEmpty())  {
+                    redirectAttributes.addFlashAttribute("errorMessage", "Email ou mot de passe absent.");
+                    return "redirect:/user?action=list";
+                }
+                if (userService.getUserByEmail(email.get()).isPresent()) {
+                    redirectAttributes.addFlashAttribute("errorMessage", "Email  déjà utilisé.");
+                    return "redirect:/user?action=list";
+                }
+                updateUser(userId, email.get(), password.get(), redirectAttributes);
                 return "redirect:/user?action=list"; // Rediriger après mise à jour
             case "delete":
-                if (!isAdmin()) return "unauthorized";
-                deleteUser(userId, model);
-                return "redirect:/user?action=list"; // Rediriger après suppression
+                if (notAdmin(loggedUser)) return "/commonPages/unauthorized";
+                deleteUser(userId, redirectAttributes);
+                return "redirect:/user?action=list" ; // Rediriger après suppression
             default:
-                return "error"; // Action inconnue
+                return "commonPages/error"; // Action inconnue
         }
     }
 
-    private void updateUser(Integer userId, String email, String password, Model model) {
+    private void updateUser(Integer userId, String email, String password, RedirectAttributes redirectAttributes) {
         if (userId == null || userService.getUserById(userId).isEmpty()) {
-            model.addAttribute("errorMessage", "Utilisateur introuvable.");
+            redirectAttributes.addFlashAttribute("errorMessage", "Utilisateur introuvable.");
             return;
         }
 
@@ -107,22 +136,20 @@ public class UserController {
         }
 
         userService.updateUser(user);
-        model.addAttribute("user", user);
-        model.addAttribute("successMessage", "Profil utilisateur modifié avec succès");
+        redirectAttributes.addFlashAttribute("successMessage", "Profil utilisateur modifié avec succès");
     }
 
-    private void deleteUser(Integer userId, Model model) {
+    private void deleteUser(Integer userId, RedirectAttributes redirectAttributes) {
         if (userId == null || userService.getUserById(userId).isEmpty()) {
-            model.addAttribute("errorMessage", "Utilisateur introuvable.");
+            redirectAttributes.addFlashAttribute("errorMessage", "Utilisateur introuvable.");
             return;
         }
         userService.deleteUser(userId);
 
-        model.addAttribute("successMessage", "Utilisateur supprimé avec succès");
+        redirectAttributes.addFlashAttribute("successMessage", "Utilisateur supprimé avec succès");
     }
 
-    private boolean isAdmin() {
-        // Logique pour vérifier si l'utilisateur actuel est un admin
-        return true; // Ceci est un exemple, à remplacer par votre propre logique d'authentification
+    private boolean notAdmin(Optional<User> loggedUser) {
+        return loggedUser.map(user -> !user.getRole().equals("admin")).orElse(true);
     }
 }

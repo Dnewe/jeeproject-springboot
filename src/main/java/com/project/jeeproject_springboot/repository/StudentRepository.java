@@ -27,7 +27,7 @@ public interface StudentRepository extends JpaRepository<Student, Integer> {
     // Recherche avec filtrage sur le cours uniquement
     @Query("SELECT s " +
             "FROM Student s " +
-            "JOIN Enrollment e ON e.course.id = s.id " +
+            "JOIN Enrollment e ON e.student.id = s.id " +
             "WHERE e.course.id = :courseId ")
     List<Student> findByCourseId(@Param("courseId") int courseId);
 

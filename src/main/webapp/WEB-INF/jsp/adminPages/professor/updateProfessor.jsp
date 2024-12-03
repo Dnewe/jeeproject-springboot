@@ -17,18 +17,18 @@
     <form action="${pageContext.request.contextPath}/professor?action=update" method="post">
         <!-- ID professeur caché -->
         <input type="hidden" name="professorId" value="${professor.id}">
-        <input type="hidden" name="result-page" value="professor?action=details&professorId=${professor.id}">
+        <input type="hidden" name="resultPage" value="professor?action=details&professorId=${professor.id}">
 
         <!-- Nom -->
         <div class="mb-3">
             <label for="last-name" class="form-label">Nom</label>
-            <input type="text" class="form-control" id="last-name" name="last-name" value="${professor.lastName}" required>
+            <input type="text" class="form-control" id="last-name" name="lastName" value="${professor.lastName}" required>
         </div>
 
         <!-- Prénom -->
         <div class="mb-3">
             <label for="first-name" class="form-label">Prénom</label>
-            <input type="text" class="form-control" id="first-name" name="first-name" value="${professor.firstName}" required>
+            <input type="text" class="form-control" id="first-name" name="firstName" value="${professor.firstName}" required>
         </div>
 
         <!-- Boutons -->

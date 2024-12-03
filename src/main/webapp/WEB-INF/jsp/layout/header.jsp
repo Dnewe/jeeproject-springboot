@@ -14,7 +14,7 @@
         <a class="navbar-brand" href="#">
             <img src="${pageContext.request.contextPath}/img/logo.png" alt="Logo" width="75" height="50" class="d-inline-block align-text-top logo">
             <span class="brand-text">Cy-Tech Gestion</span>
-            <a href="home" class="btn btn-primary">Accueil</a>
+            <a href="/home" class="btn btn-primary">Accueil</a>
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
             <span class="navbar-toggler-icon"></span>
@@ -23,7 +23,7 @@
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
                     <a href="${pageContext.request.contextPath}/settings?action=settingsForm" class="btn btn-primary">Paramètres</a>
-                    <form action="logout" method="post" style="display: inline;">
+                    <form action="/logout" method="get" style="display: inline;">
                         <button type="submit" class="btn btn-dark logout-btn">Déconnexion</button>
                     </form>
                 </li>

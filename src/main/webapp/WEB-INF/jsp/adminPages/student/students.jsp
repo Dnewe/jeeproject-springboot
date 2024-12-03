@@ -30,18 +30,6 @@
         <button class="btn btn-primary" type="submit">Rechercher</button>
     </form>
 
-    <!-- Messages d'erreur ou de succès -->
-    <c:if test="${not empty errorMessage}">
-        <div class="alert alert-danger">
-            ${errorMessage}
-        </div>
-    </c:if>
-    <c:if test="${not empty successMessage}">
-        <div class="alert alert-success">
-            ${successMessage}
-        </div>
-    </c:if>
-
     <!-- Tableau des étudiants -->
     <table class="table table-striped">
         <thead class="table-light">
@@ -61,7 +49,7 @@
                 <td>${student.lastName}</td>
                 <td>${student.firstName}</td>
                 <td>${student.user.email}</td>
-                <td><fmt:formatDate value="${student.dateOfBirth}" pattern="dd/MM/yyyy"/></td>
+                <td>${student.dateOfBirth}</td>
                 <td>
                     <!-- Boutons actions -->
                     <a href="${pageContext.request.contextPath}/student?action=details&studentId=${student.id}" class="btn btn-info btn-sm">Détails</a>

@@ -1,4 +1,4 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <!DOCTYPE html>
 <html lang="fr">
@@ -43,7 +43,7 @@
                         <td>
                             <form action="${pageContext.request.contextPath}/course" method="post" style="display: inline-block;">
                                 <input type="hidden" name="action" value="removeProfessor">
-                                <input type="hidden" name="result-page" value="professor?action=details&professorId=${professor.id}">
+                                <input type="hidden" name="resultPage" value="professor?action=details&professorId=${professor.id}">
                                 <input type="hidden" name="professorId" value="${professor.id}">
                                 <input type="hidden" name="courseId" value="${course.id}">
                                 <button type="submit" class="btn btn-danger btn-sm">Retirer</button>
@@ -58,7 +58,7 @@
         <h4>Assigner un Nouveau Cours</h4>
         <form action="${pageContext.request.contextPath}/course" method="post">
             <input type="hidden" name="action" value="assignProfessor">
-            <input type="hidden" name="result-page" value="professor?action=details&professorId=${professor.id}">
+            <input type="hidden" name="resultPage" value="professor?action=details&professorId=${professor.id}">
             <input type="hidden" name="professorId" value="${professor.id}">
 
             <div class="form-group">

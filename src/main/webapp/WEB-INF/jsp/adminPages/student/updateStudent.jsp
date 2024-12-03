@@ -21,19 +21,19 @@
         <!-- Nom -->
         <div class="mb-3">
             <label for="last-name" class="form-label">Nom</label>
-            <input type="text" class="form-control" id="last-name" name="last-name" value="${student.lastName}" required>
+            <input type="text" class="form-control" id="last-name" name="lastName" value="${student.lastName}" required>
         </div>
 
         <!-- Prénom -->
         <div class="mb-3">
             <label for="first-name" class="form-label">Prénom</label>
-            <input type="text" class="form-control" id="first-name" name="first-name" value="${student.firstName}" required>
+            <input type="text" class="form-control" id="first-name" name="firstName" value="${student.firstName}" required>
         </div>
 
         <!-- Date de naissance -->
         <div class="mb-3">
             <label for="date-of-birth" class="form-label">Date de naissance</label>
-            <input type="date" class="form-control" id="date-of-birth" name="date-of-birth" value="${student.dateOfBirth}">
+            <input type="date" class="form-control" id="date-of-birth" name="dateOfBirth" value="${student.dateOfBirth}">
         </div>
 
         <!-- Boutons -->

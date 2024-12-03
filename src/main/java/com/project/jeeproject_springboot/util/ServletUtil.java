@@ -5,6 +5,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import org.springframework.ui.Model;
 
 import java.io.IOException;
 import java.net.URLEncoder;
@@ -37,46 +38,24 @@ public class ServletUtil {
         }
     }
 
-    public static void redirect(HttpServletRequest req, HttpServletResponse resp, String redirectPage, String errorPage, String errorMessage) throws ServletException, IOException {
-        if (errorMessage==null || errorMessage.isEmpty()) {
-            if (req.getAttribute("successMessage") != null) {
-                String successMessage = (String) req.getAttribute("successMessage");
-                String encodedMessage = URLEncoder.encode(successMessage, StandardCharsets.UTF_8);
-                redirectPage += (redirectPage.contains("?"))? "&": "?";
-                redirectPage += "successMessage=" + encodedMessage;
-            }
-            resp.sendRedirect(redirectPage);
-        } else {
+    public static String redirect(Model model, String resultPage) {
+        if (model.getAttribute("successMessage")!=null) {
+            String successMessage = (String) model.getAttribute("successMessage");
+            String encodedMessage = URLEncoder.encode(successMessage, StandardCharsets.UTF_8);
+            resultPage += (resultPage.contains("?"))? "&": "?";
+            resultPage += "successMessage=" + encodedMessage;
+        }
+        if (model.getAttribute("errorMessage")!=null) {
+            String errorMessage = (String) model.getAttribute("errorMessage");
             String encodedMessage = URLEncoder.encode(errorMessage, StandardCharsets.UTF_8);
-            errorPage += (errorPage.contains("?"))? "&": "?";
-            errorPage += "errorMessage=" + encodedMessage;
-            resp.sendRedirect(errorPage);
+            resultPage += (resultPage.contains("?"))? "&": "?";
+            resultPage += "errorMessage=" + encodedMessage;
         }
+        return "redirect:" + resultPage;
     }
 
-    public static void redirect_(HttpServletRequest req, HttpServletResponse resp, String redirectPage, String errorPage, String errorMessage, boolean redirectError) throws ServletException, IOException {
-        if (errorMessage==null || errorMessage.isEmpty()) {
-            redirect(req, resp, redirectPage, errorPage, errorMessage);
-        } else {
-            if (!redirectError) {
-                req.setAttribute("errorMessage", errorMessage);
-                req.getRequestDispatcher(errorPage).forward(req, resp);
-            } else {
-                String encodedMessage = URLEncoder.encode(errorMessage, StandardCharsets.UTF_8);
-                errorPage += (errorPage.contains("?"))? "&": "?";
-                errorPage += "errorMessage=" + encodedMessage;
-                resp.sendRedirect(errorPage);
-            }
-        }
-    }
-
-    public static void invalidAction(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-        response.getWriter().println("{\"error\": \"Invalid action\"}");
-    }
-
-    public static void unauthorized(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher("/WEB-INF/commonPages/unauthorized.jsp").forward(req, resp);
+    public static String unauthorized(){
+        return "/commonPages/unauthorized";
     }
 
     public static boolean validString(String str) {

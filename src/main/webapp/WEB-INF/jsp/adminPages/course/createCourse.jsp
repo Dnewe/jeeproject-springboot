@@ -8,14 +8,14 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-<jsp:include page="/WEB-INF/util/header.jsp" />
+<jsp:include page="../../layout/header.jsp" />
 <div class="container mt-5">
     <h2>Créer Cours</h2>
-    <jsp:include page="/WEB-INF/util/errorMessage.jsp" />
+    <jsp:include page="../../layout/errorMessage.jsp" />
 
     <form action="${pageContext.request.contextPath}/course?action=create" method="post">
         <!-- ID professeur caché -->
-        <input type="hidden" name="result-page" value="course?action=list">
+        <input type="hidden" name="resultPage" value="course?action=list">
 
         <!-- Nom -->
         <div class="mb-3">
@@ -36,5 +36,5 @@
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
-<jsp:include page="/WEB-INF/util/footer.jsp" />
+<jsp:include page="../../layout/footer.jsp" />
 </html>

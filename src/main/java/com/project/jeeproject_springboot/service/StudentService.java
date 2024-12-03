@@ -26,9 +26,9 @@ public class StudentService {
      */
     public List<Student> findFilteredStudents(String search, int courseId) {
         if (search != null && !search.trim().isEmpty() && courseId != -1) {
-            return studentRepository.findByCourseIdAndSearch(search, courseId);
+            return studentRepository.findByCourseIdAndSearch(search.toLowerCase(), courseId);
         } else if (search != null && !search.trim().isEmpty()) {
-            return studentRepository.findBySearch(search);
+            return studentRepository.findBySearch(search.toLowerCase());
         } else if (courseId != -1) {
             return studentRepository.findByCourseId(courseId);
         } else {

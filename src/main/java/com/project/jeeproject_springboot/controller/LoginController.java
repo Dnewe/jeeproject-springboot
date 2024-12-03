@@ -50,17 +50,17 @@ public class LoginController {
                 case "admin":
                     return "/adminPages/adminDashboard";  // Redirection vers le tableau de bord admin
                 case "student":
-                    session.setAttribute("loggedStudent", studentService.findStudentByUserId(user.getId()));
+                    session.setAttribute("loggedStudent", studentService.findStudentByUserId(user.getId()).get());
                     return "/studentPages/studentDashboard";  // Redirection vers le tableau de bord étudiant
                 case "professor":
-                    session.setAttribute("loggedProfessor", professorService.getProfessorByUserId(user.getId()));
+                    session.setAttribute("loggedProfessor", professorService.getProfessorByUserId(user.getId()).get());
                     return "/professorPages/professorDashboard";  // Redirection vers le tableau de bord professeur
                 default:
-                    return "/login";  // Si le rôle est inconnu
+                    return "redirect:/login";  // Si le rôle est inconnu
             }
         } else {
             redirectAttributes.addFlashAttribute("errorMessage", "Email et/ou mot de passe invalide(s).");
-            return "/login";  // Redirection en cas d'échec de l'authentification
+            return "redirect:/login";  // Redirection en cas d'échec de l'authentification
         }
     }
 }

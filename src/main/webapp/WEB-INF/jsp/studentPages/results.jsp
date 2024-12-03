@@ -1,9 +1,5 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-
-
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
 
 <!DOCTYPE html>
 <html lang="fr">
@@ -35,13 +31,14 @@
                 <th>Date</th>
                 <th>Coefficient</th>
                 <th>Note</th>
+                <th>Note</th>
             </tr>
             </thead>
             <tbody>
             <c:forEach var="result" items="${entry.value}">
                 <tr>
                     <td>${result.assessmentName}</td>
-                    <td><fmt:formatDate value="${result.entryDate}" pattern="dd/MM/yyyy"/></td>
+                    <td>${result.entryDate}"</td>
                     <td>${result.weight}</td>
                     <td>${result.grade} / ${result.maxScore}</td>
                 </tr>

@@ -8,15 +8,15 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-<jsp:include page="/WEB-INF/util/header.jsp" />
+<jsp:include page="../../layout/header.jsp" />
 <div class="container mt-5">
     <h2>Modifier Cours</h2>
-    <jsp:include page="/WEB-INF/util/errorMessage.jsp" />
+    <jsp:include page="../../layout/errorMessage.jsp" />
 
     <form action="${pageContext.request.contextPath}/course?action=update" method="post">
         <!-- ID professeur caché -->
-        <input type="hidden" name="course-id" value="${course.id}">
-        <input type="hidden" name="result-page" value="course?action=details&course-id=${course.id}">
+        <input type="hidden" name="courseId" value="${course.id}">
+        <input type="hidden" name="resultPage" value="course?action=details&courseId=${course.id}">
 
         <!-- Nom -->
         <div class="mb-3">
@@ -31,11 +31,11 @@
         </div>
 
         <!-- Boutons -->
-        <a href="${pageContext.request.contextPath}/course?action=details&course-id=${course.id}" class="btn btn-danger">Annuler</a>
+        <a href="${pageContext.request.contextPath}/course?action=details&courseId=${course.id}" class="btn btn-danger">Annuler</a>
         <button type="submit" class="btn btn-primary">Sauvegarder</button>
     </form>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
-<jsp:include page="/WEB-INF/util/footer.jsp" />
+<jsp:include page="../../layout/footer.jsp" />
 </html>

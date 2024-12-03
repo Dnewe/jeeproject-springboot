@@ -2,6 +2,7 @@ package com.project.jeeproject_springboot.model;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -24,7 +25,7 @@ public class Result {
     private double weight;
 
     @Column(name = "entry_date", nullable = false)
-    private Date entryDate;
+    private LocalDate entryDate;
 
     @ManyToOne
     @JoinColumn(name = "enrollment_id", nullable = false)
@@ -43,8 +44,8 @@ public class Result {
     public double getWeight() { return weight; }
     public void setWeight(double weight) { this.weight = weight; }
 
-    public Date getEntryDate() { return entryDate; }
-    public void setEntryDate(Date entryDate) { this.entryDate = entryDate; }
+    public LocalDate getEntryDate() { return entryDate; }
+    public void setEntryDate(LocalDate entryDate) { this.entryDate = entryDate; }
 
     public Enrollment getEnrollment() { return enrollment; }
     public void setEnrollment(Enrollment enrollment) {this.enrollment = enrollment; }

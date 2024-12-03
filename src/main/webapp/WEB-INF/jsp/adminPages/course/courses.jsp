@@ -1,5 +1,5 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 
@@ -13,10 +13,10 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-<jsp:include page="/WEB-INF/util/header.jsp" />
+<jsp:include page="../../layout/header.jsp" />
     <div class="container">
         <h2 class="mb-4">Liste des Cours</h2>
-        <jsp:include page="/WEB-INF/util/errorMessage.jsp" />
+        <jsp:include page="../../layout/errorMessage.jsp" />
 
         <table class="table table-striped">
             <thead>
@@ -37,15 +37,15 @@
                         <td>${course.professor != null ? course.professor.firstName: ""} ${course.professor != null ? " ": "Aucun"} ${course.professor != null ? course.professor.lastName: ""}</td>
                         <td>
                             <!-- Détails du cours -->
-                            <a href="course?action=details&course-id=${course.id}" class="btn btn-info">Détails</a>
+                            <a href="course?action=details&courseId=${course.id}" class="btn btn-info">Détails</a>
 
                             <!-- Mise à jour du cours -->
-                            <a href=${pageContext.request.contextPath}/course?action=updateForm&course-id=${course.id} class="btn btn-warning">Modifier</a>
+                            <a href=${pageContext.request.contextPath}/course?action=updateForm&courseId=${course.id} class="btn btn-warning">Modifier</a>
 
                             <!-- Suppression du cours -->
                             <form action="course" method="post" style="display:inline;">
                                 <input type="hidden" name="action" value="delete">
-                                <input type="hidden" name="course-id" value="${course.id}">
+                                <input type="hidden" name="courseId" value="${course.id}">
                                 <button type="submit" class="btn btn-danger" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce cours ?');">Supprimer</button>
                             </form>
                         </td>
@@ -66,5 +66,5 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </body>
-<jsp:include page="/WEB-INF/util/footer.jsp" />
+<jsp:include page="../../layout/footer.jsp" />
 </html>

@@ -2,6 +2,7 @@ package com.project.jeeproject_springboot.model;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -12,7 +13,7 @@ public class Enrollment {
     private int id;
 
     @Column(name = "enrollment_date", nullable = false)
-    private Date enrollmentDate;
+    private LocalDate enrollmentDate;
 
     @ManyToOne
     @JoinColumn(name = "student_id", nullable = false)
@@ -26,8 +27,8 @@ public class Enrollment {
     public int getId() { return id; }
     public void setId(int id) { this.id = id; }
 
-    public Date getEnrollmentDate() { return enrollmentDate; }
-    public void setEnrollmentDate(Date enrollmentDate) { this.enrollmentDate = enrollmentDate; }
+    public LocalDate getEnrollmentDate() { return enrollmentDate; }
+    public void setEnrollmentDate(LocalDate enrollmentDate) { this.enrollmentDate = enrollmentDate; }
 
     public Student getStudent() { return student; }
     public void setStudent(Student student) { this.student = student; }

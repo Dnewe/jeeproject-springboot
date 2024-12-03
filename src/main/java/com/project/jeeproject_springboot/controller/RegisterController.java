@@ -44,6 +44,7 @@ public class RegisterController {
                            @RequestParam(required = false) String studentFirstName,
                            @RequestParam(required = false) LocalDate dateOfBirth,
                            BindingResult result,
+                           Model model,
                            RedirectAttributes redirectAttributes) {
 
         errorMessage = null;
@@ -84,7 +85,7 @@ public class RegisterController {
         }
 
         redirectAttributes.addFlashAttribute("successMessage", "Utilisateur créé avec succès");
-        return "redirect:/login";  // Redirige vers la page de connexion après inscription
+        return ServletUtil.redirect(model, "/user?action=list");  // Redirige vers la page de connexion après inscription
     }
 
     private boolean validUserParameters(User user, String role) {

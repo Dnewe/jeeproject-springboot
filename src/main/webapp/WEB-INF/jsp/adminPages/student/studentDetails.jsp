@@ -1,6 +1,5 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
 
 <!DOCTYPE html>
 <html lang="fr">
@@ -25,7 +24,7 @@
                 <p><strong>Nom :</strong> ${student.lastName}</p>
                 <p><strong>Prénom :</strong> ${student.firstName}</p>
                 <p><strong>Contact :</strong> ${student.user.email}</p>
-                <p><strong>Date de naissance :</strong> <fmt:formatDate value="${student.dateOfBirth}" pattern="dd/MM/yyyy"/></p>
+                <p><strong>Date de naissance :</strong> ${student.dateOfBirth}</p>
             </div>
         </div>
 
@@ -73,9 +72,14 @@
 
         <div class="mt-4">
             <h4>Administratif</h4>
-            <a href="${pageContext.request.contextPath}/transcript?studentId=${student.id}" class="btn btn-primary">Télécharger Relevé de notes</a>
+            <form action="${pageContext.request.contextPath}/transcript" method="get" style="display: inline;">
+                <input type="hidden" name="studentId" value="${student.id}">
+                <input type="hidden" name="resultPage" value="student?action=details&studentId=${student.id}">
+                <button type="submit" class="btn btn-primary">Télécharger Relevé de notes</button>
+            </form>
             <form action="${pageContext.request.contextPath}/performanceReport" method="post" style="display: inline;">
                 <input type="hidden" name="studentId" value="${student.id}">
+                <input type="hidden" name="resultPage" value="student?action=details&studentId=${student.id}">
                 <button type="submit" class="btn btn-primary">Télécharger Rapport de Performance</button>
             </form>
         </div>

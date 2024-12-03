@@ -1,6 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -36,7 +35,7 @@
         <c:forEach var="result" items="${entry.value}">
           <tr>
             <td>${result.assessmentName}</td>
-            <td><fmt:formatDate value="${result.entryDate}" pattern="dd/MM/yyyy"/></td>
+            <td>${result.entryDate}</td>
             <td>${result.weight}</td>
             <td>${result.grade} / ${result.maxScore}</td>
           </tr>
